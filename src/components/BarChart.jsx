@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { IASHighChart } from 'react-core';
 
-export default function BarChart({ teamId }) {
+export default function BarChart({ teamId, startDate, endDate, dateFlag }) {
 
     // api call
     const [response, setResponse] = React.useState([]);
@@ -11,12 +11,13 @@ export default function BarChart({ teamId }) {
     const [countErrorReports, setCountErrorReports] = React.useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/totalReportsRunByTypeAndStatus/PUB/${teamId}/daily?startDate=20220901&endDate=20220930`)
+        fetch(`http://localhost:8080/totalReportsRunByTypeAndStatus/PUB/${teamId}/daily?startDate=${startDate}&endDate=${endDate}`)
             .then((res) => res.json())
             .then((data) => {
                 setResponse(data);
             });
-    }, [teamId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [teamId, dateFlag]);
 
     useEffect(() => {
         setDates(response.map((e) => {
@@ -32,7 +33,6 @@ export default function BarChart({ teamId }) {
 
     return (
         <>
-            {/* Bar Chart */}
             <IASHighChart
                 series={[
                     {

@@ -2,19 +2,20 @@ import React from 'react';
 import { useEffect } from 'react';
 import { IASCirclePieChart } from 'react-core';
 
-export default function PieChart2({ teamId }) {
+export default function PieChart2({ teamId, startDate, endDate, dateFlag }) {
 
     const [response, setResponse] = React.useState([]);
     const [errorResponse, setErrorResponse] = React.useState();
 
     React.useEffect(() => {
-        fetch(`http://localhost:8080/reportsRunWithErrorDetails/PUB/${teamId}?startDate=20220101&endDate=20220930`)
+        fetch(`http://localhost:8080/reportsRunWithErrorDetails/PUB/${teamId}?startDate=${startDate}&endDate=${endDate}`)
             .then((res) => res.json())
             .then((data) => {
                 if (data.length > 0) setResponse(data);
                 else setResponse([{ errorType: 'No Error Types', count: 0 }]);
             });
-    }, [teamId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [teamId, dateFlag]);
 
     useEffect(() => {
         setErrorResponse(response.map((e) => {

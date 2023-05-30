@@ -4,8 +4,8 @@ export default function TeamsDropdown({ teamId, setTeamId }) {
     return (
         <div>
             <select style={{
-                height: '50px',
-                width: '300px',
+                height: '38px',
+                width: '310px',
                 fontSize: '15px'
             }} onChange={(e) => {
                 setTeamId(e.target.value);

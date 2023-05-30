@@ -1,9 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
-// import HighCharts, { ExportingOptions, LegendOptions, TooltipOptions } from 'highcharts';
 import { IASHighChart } from 'react-core';
 
-export default function LineChart({ teamId }) {
+export default function LineChart({ teamId, startDate, endDate, dateFlag }) {
 
     // api call
     const [totalReports, setTotalReports] = React.useState([]);
@@ -11,12 +10,13 @@ export default function LineChart({ teamId }) {
     const [dates, setDates] = React.useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/totalReportsRun/PUB/${teamId}/daily?startDate=20220901&endDate=20220930`)
+        fetch(`http://localhost:8080/totalReportsRun/PUB/${teamId}/daily?startDate=${startDate}&endDate=${endDate}`)
             .then((res) => res.json())
             .then((data) => {
                 setTotalReports(data);
             });
-    }, [teamId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [teamId, dateFlag]);
 
     useEffect(() => {
         setDates(totalReports.map((e) => {
@@ -152,7 +152,6 @@ export default function LineChart({ teamId }) {
 
     return (
         <>
-            {/* Line Chart */}
             <IASHighChart
                 series={[
                     {
