@@ -44,7 +44,7 @@ export default function PieChart2({ teamId, startDate, endDate, dateFlag }) {
                 subtitleTitle="Report Types"
                 subtitleTooltipText="This is a tooltip that explains the total you see in the chart."
                 subtitleTotal=""
-                title="Error types with their count"
+                title="Anomaly Report Reasons"
             />
         </div>
     )
