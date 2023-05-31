@@ -14,7 +14,7 @@ export default function PieChart({ teamId, startDate, endDate, dateFlag }) {
                 });
         }
         else {
-            fetch(`http://localhost:8080/reportsRunWithReportType/FW?startDate=${startDate}&endDate=${endDate}`)
+            fetch(`http://localhost:8080/reportsRunWithReportType/PUB?startDate=${startDate}&endDate=${endDate}`)
                 .then((res) => res.json())
                 .then((data) => {
                     if (Object.keys(data).length > 0) setResponse(Object.entries(data).map(([name, y]) => ({ name, y })));

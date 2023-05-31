@@ -8,6 +8,7 @@ export default function BarChart({ teamId, startDate, endDate, dateFlag, freq })
     const [response, setResponse] = React.useState([]);
     const [countScheduledReports, setCountScheduledReports] = React.useState([]);
     const [dates, setDates] = React.useState([]);
+    const [countOnDemandReports, setCountOnDemandReports] = React.useState([]);
     const [countErrorReports, setCountErrorReports] = React.useState([]);
 
     useEffect(() => {
@@ -36,8 +37,14 @@ export default function BarChart({ teamId, startDate, endDate, dateFlag, freq })
             return e.weekRange;
         }));
         setCountScheduledReports(response.map((e) => {
+            console.log("scheduled report data count" + e.scheduledReports);
             return e.scheduledReports;
         }));
+        setCountOnDemandReports(response.map((e) => {
+
+            return e.onDemandReports;
+
+        }))
         setCountErrorReports(response.map((e) => {
             return e.errorReports;
         }));
@@ -57,6 +64,15 @@ export default function BarChart({ teamId, startDate, endDate, dateFlag, freq })
                         type: 'column'
                     },
                     {
+                        color: '#16AA99',
+                        data: countOnDemandReports,
+                        name: 'On-Demand Reports',
+                        tooltip: {
+                            valueSuffix: ' '
+                        },
+                        type: 'column'
+                    },
+                    {
                         color: '#f03827',
                         data: countErrorReports,
                         name: 'Error Reports',
@@ -65,6 +81,7 @@ export default function BarChart({ teamId, startDate, endDate, dateFlag, freq })
                         },
                         type: 'column'
                     }
+
                 ]}
                 title="Scheduled & Failed Reports"
                 xAxis={[
