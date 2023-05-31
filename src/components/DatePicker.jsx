@@ -61,7 +61,7 @@ export default function DatePicker({ setStartDate, setEndDate, setDateFlag, date
                     borderColor: '#36e0d2',
                     color: 'white',
                     fontFamily: 'Open sans bold 12px'
-                }}> <b>Set Date</b> </button>
+                }}> <b>Update</b> </button>
         </div>
     )
 }
