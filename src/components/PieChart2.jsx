@@ -8,12 +8,22 @@ export default function PieChart2({ teamId, startDate, endDate, dateFlag }) {
     const [errorResponse, setErrorResponse] = React.useState();
 
     React.useEffect(() => {
-        fetch(`http://localhost:8080/reportsRunWithErrorDetails/PUB/${teamId}?startDate=${startDate}&endDate=${endDate}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.length > 0) setResponse(data);
-                else setResponse([{ errorType: 'No Error Types', count: 0 }]);
-            });
+        if (teamId != -1) {
+            fetch(`http://localhost:8080/reportsRunWithErrorDetails/FW/${teamId}?startDate=${startDate}&endDate=${endDate}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.length > 0) setResponse(data);
+                    else setResponse([{ errorType: 'No Error Types', count: 0 }]);
+                });
+        }
+        else {
+            fetch(`http://localhost:8080/reportsRunWithErrorDetails/FW?startDate=${startDate}&endDate=${endDate}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.length > 0) setResponse(data);
+                    else setResponse([{ errorType: 'No Error Types', count: 0 }]);
+                });
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, dateFlag]);
 
@@ -44,7 +54,7 @@ export default function PieChart2({ teamId, startDate, endDate, dateFlag }) {
                 subtitleTitle="Report Types"
                 subtitleTooltipText="This is a tooltip that explains the total you see in the chart."
                 subtitleTotal=""
-                title="Anomaly Report Reasons"
+                title="Report Failure Reasons"
             />
         </div>
     )

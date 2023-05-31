@@ -5,12 +5,22 @@ export default function PieChart({ teamId, startDate, endDate, dateFlag }) {
 
     const [response, setResponse] = React.useState([]);
     React.useEffect(() => {
-        fetch(`http://localhost:8080/reportsRunWithReportType/PUB/${teamId}?startDate=${startDate}&endDate=${endDate}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (Object.keys(data).length > 0) setResponse(Object.entries(data).map(([name, y]) => ({ name, y })));
-                else setResponse([{ name: 'No Reports', y: 0 }])
-            });
+        if (teamId != -1) {
+            fetch(`http://localhost:8080/reportsRunWithReportType/FW/${teamId}?startDate=${startDate}&endDate=${endDate}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (Object.keys(data).length > 0) setResponse(Object.entries(data).map(([name, y]) => ({ name, y })));
+                    else setResponse([{ name: 'No Reports', y: 0 }])
+                });
+        }
+        else {
+            fetch(`http://localhost:8080/reportsRunWithReportType/FW?startDate=${startDate}&endDate=${endDate}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (Object.keys(data).length > 0) setResponse(Object.entries(data).map(([name, y]) => ({ name, y })));
+                    else setResponse([{ name: 'No Reports', y: 0 }])
+                });
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, dateFlag]);
     return (

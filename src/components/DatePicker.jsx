@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-export default function DatePicker({ setStartDate, setEndDate, setDateFlag, dateFlag }) {
-    const [currentStartDate, setCurrentStartDate] = React.useState('2022-09-01');
-    const [currentEndDate, setCurrentEndDate] = React.useState('2022-09-30');
+export default function DatePicker({ setStartDate, setEndDate, setDateFlag, dateFlag, setFreq }) {
+    const [currentStartDate, setCurrentStartDate] = React.useState();
+    const [currentEndDate, setCurrentEndDate] = React.useState();
 
     return (
         <div
@@ -39,6 +39,16 @@ export default function DatePicker({ setStartDate, setEndDate, setDateFlag, date
                     margin: '10px'
                 }}
             ></input>
+
+            <select style={{
+                padding: '5px'
+            }}
+                onChange={(e) => {
+                    setFreq(e.target.value);
+                }}>
+                <option value='daily'>daily</option>
+                <option value='weekly'>weekly</option>
+            </select>
 
             <button onClick={() => {
                 setDateFlag(!dateFlag);

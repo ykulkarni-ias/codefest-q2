@@ -13,6 +13,8 @@ function App() {
   const [startDate, setStartDate] = React.useState(20220901);
   const [endDate, setEndDate] = React.useState(20220930);
   const [dateFlag, setDateFlag] = React.useState(true);
+  const [freq, setFreq] = React.useState('daily');
+
   return (
     <>
       <div style={{
@@ -21,7 +23,7 @@ function App() {
         alignItems: 'center',
         paddingTop: '10px'
       }}>
-        <h1>CRB Report Anomaly Detection System</h1>
+        <h1>CRB Insights Dashboard</h1>
 
 
       </div>
@@ -46,7 +48,7 @@ function App() {
           boxSizing: 'border-box'
 
         }}>
-          <DatePicker setStartDate={setStartDate} setEndDate={setEndDate} setDateFlag={setDateFlag} dateFlag={dateFlag} /></div>
+          <DatePicker setStartDate={setStartDate} setEndDate={setEndDate} setDateFlag={setDateFlag} dateFlag={dateFlag} setFreq={setFreq} /></div>
 
       </div>
 
@@ -63,7 +65,7 @@ function App() {
             paddingLeft: '8%',
           }}
         >
-          <LineChart teamId={teamId} startDate={startDate} endDate={endDate} dateFlag={dateFlag} /></div>
+          <LineChart teamId={teamId} startDate={startDate} endDate={endDate} dateFlag={dateFlag} freq={freq} /></div>
         <div
           style={{
             alignItems: 'right',
@@ -71,7 +73,7 @@ function App() {
             paddingLeft: '15%'
           }}
         >
-          <BarChart teamId={teamId} startDate={startDate} endDate={endDate} dateFlag={dateFlag} /></div>
+          <BarChart teamId={teamId} startDate={startDate} endDate={endDate} dateFlag={dateFlag} freq={freq} /></div>
       </div>
       <div style={{
         display: 'flex',

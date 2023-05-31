@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { IASHighChart } from 'react-core';
 
-export default function BarChart({ teamId, startDate, endDate, dateFlag }) {
+export default function BarChart({ teamId, startDate, endDate, dateFlag, freq }) {
 
     // api call
     const [response, setResponse] = React.useState([]);
@@ -11,17 +11,29 @@ export default function BarChart({ teamId, startDate, endDate, dateFlag }) {
     const [countErrorReports, setCountErrorReports] = React.useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/totalReportsRunByTypeAndStatus/PUB/${teamId}/daily?startDate=${startDate}&endDate=${endDate}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setResponse(data);
-            });
+        if (teamId != -1) {
+            fetch(`http://localhost:8080/totalReportsRunByTypeAndStatus/FW/${teamId}/${freq}?startDate=${startDate}&endDate=${endDate}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setResponse(data);
+                });
+        }
+        else {
+            fetch(`http://localhost:8080/totalReportsRunByTypeAndStatus/FW/${freq}?startDate=${startDate}&endDate=${endDate}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setResponse(data);
+                });
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, dateFlag]);
 
     useEffect(() => {
         setDates(response.map((e) => {
-            return e.day;
+            if (e.hasOwnProperty('day')) {
+                return e.day;
+            }
+            return e.weekRange;
         }));
         setCountScheduledReports(response.map((e) => {
             return e.scheduledReports;

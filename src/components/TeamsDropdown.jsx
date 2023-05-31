@@ -22,6 +22,9 @@ export default function TeamsDropdown({ teamId, setTeamId }) {
                 <option value={4584}>
                     The Weather Company - Publisher - US
                 </option>
+                <option value={-1}>
+                    All Teams
+                </option>
 
             </select>
         </div>
