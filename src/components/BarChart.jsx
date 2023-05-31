@@ -45,7 +45,7 @@ export default function BarChart({ teamId, startDate, endDate, dateFlag }) {
                         type: 'column'
                     },
                     {
-                        color: '#16AA99',
+                        color: '#f03827',
                         data: countErrorReports,
                         name: 'Error Reports',
                         tooltip: {
