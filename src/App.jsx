@@ -10,8 +10,8 @@ import TeamsDropdown from './components/TeamsDropdown';
 function App() {
 
   const [teamId, setTeamId] = React.useState(11831);
-  const [startDate, setStartDate] = React.useState(20220901);
-  const [endDate, setEndDate] = React.useState(20220930);
+  const [startDate, setStartDate] = React.useState('');
+  const [endDate, setEndDate] = React.useState('');
   const [dateFlag, setDateFlag] = React.useState(true);
   const [freq, setFreq] = React.useState('daily');
 
